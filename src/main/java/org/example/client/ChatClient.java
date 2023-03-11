@@ -30,11 +30,9 @@ public class ChatClient {
             new WriteThread(socket, this).start();
         }
         catch (UnknownHostException e) {
-            System.err.println("Host no found: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Host not found: " + e.getMessage());
         } catch (IOException e) {
             System.err.println("I/O Error: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

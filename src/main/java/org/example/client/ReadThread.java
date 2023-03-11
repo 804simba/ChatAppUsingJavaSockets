@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * This thread is responsible for reading user's input and send it to the server.
@@ -37,11 +38,10 @@ public class ReadThread extends Thread {
 
                 // prints the username after displaying the server's message.
                 if (client.getUsername() != null) {
-                    System.out.print("[" + client.getUsername() + "]: \n");
+                    System.out.print("[" + client.getUsername() + "]: ");
                 }
             } catch (IOException e) {
                 System.err.println("Error reading from server: " + e.getMessage());
-                e.printStackTrace();
                 break;
             }
         }

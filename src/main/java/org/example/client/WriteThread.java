@@ -28,9 +28,8 @@ public class WriteThread extends Thread {
 //        Console console = System.console();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter your username >>>>>> \n");
+        System.out.print("Enter your username >>>>>> ");
         String username = scanner.nextLine();
-        System.out.println();
 
         client.setUsername(username);
         output.println(username);
@@ -38,9 +37,8 @@ public class WriteThread extends Thread {
         String text;
 
         do {
-            System.out.print("[" + username + "]");
+            System.out.print("[" + username + "] >>>> ");
             text = scanner.nextLine();
-            System.out.println();
             output.println(text);
         } while (!text.equals("bye"));
 

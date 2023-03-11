@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * This code represents a single thread that handles the connection between the server and a single client.
@@ -53,11 +54,15 @@ public class UserThread extends Thread {
                 server.broadCast(serverMessage, this);
             } while (!clientMessage.equals("bye"));
 
-            server.removeUser(username,this);
-            socket.close();
+            try {
+                server.removeUser(username,this);
+                socket.close();
 
-            serverMessage = username + "left the chat.";
-            server.broadCast(serverMessage, this);
+                serverMessage = username + " left the chat.";
+                server.broadCast(serverMessage, this);
+            } catch (SocketException e) {
+                System.err.println("Session ended.");
+            }
 
         } catch (IOException e) {
             System.out.println("User thread got interrupted!" + e.getMessage());

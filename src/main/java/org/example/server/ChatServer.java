@@ -19,6 +19,9 @@ public class ChatServer {
         this.userNames = new HashSet<>();
         this.userThreads = new HashSet<>();
     }
+    // responsible for setting up the server socket, listening for incoming connections
+    // and starting a new thread to handle each connection. It then returns an instance
+    // of Socket at server-side.
     public void execute() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Chat server is listening on port: " + port);
@@ -26,6 +29,10 @@ public class ChatServer {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("New user connected >>>>");
+
+                // handles the connection between the server and a single client.
+                // It reads input from the client and broadcasts messages to all
+                // other connected clients.
 
                 UserThread newUser = new UserThread(socket, this);
                 userThreads.add(newUser);
@@ -54,6 +61,14 @@ public class ChatServer {
             }
         }
     }
+    // send private message to a specific client.
+    public  void sendDM (String message, String recipient, UserThread sender) {
+        for (UserThread user : userThreads) {
+            if (user.getName().equals(recipient)) {
+                user.sendMessage("[Private message from " + sender.getName() + "]>>>>" + message);
+            }
+        }
+    }
     // stores username of newly connected clients.
     public void addUsername(String userName) {
         userNames.add(userName);
@@ -63,7 +78,7 @@ public class ChatServer {
         boolean removed = userNames.remove(userName);
         if (removed) {
             userThreads.remove(userThread);
-            System.out.println("The " + userName + " left the chat..");
+            System.out.println(userName + " session terminated.");
         }
     }
     // returns true if there are other users connected.
