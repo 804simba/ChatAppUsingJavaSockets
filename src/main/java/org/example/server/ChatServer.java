@@ -61,14 +61,6 @@ public class ChatServer {
             }
         }
     }
-    // send private message to a specific client.
-    public  void sendDM (String message, String recipient, UserThread sender) {
-        for (UserThread user : userThreads) {
-            if (user.getName().equals(recipient)) {
-                user.sendMessage("[Private message from " + sender.getName() + "]>>>>" + message);
-            }
-        }
-    }
     // stores username of newly connected clients.
     public void addUsername(String userName) {
         userNames.add(userName);
