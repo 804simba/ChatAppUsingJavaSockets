@@ -1,17 +1,11 @@
 package org.example.client;
 
-import org.example.client.ChatClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.SocketException;
 
-/**
- * This thread is responsible for reading user's input and send it to the server.
- * It runs in an infinite loop until the user types 'bye' to quit.
- * */
 public class ReadThread extends Thread {
     private BufferedReader input;
     private Socket socket;

@@ -1,7 +1,6 @@
 package org.example.server;
 
-import org.example.server.ChatServer;
-
+import lombok.Getter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,19 +8,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
-/**
- * This code represents a single thread that handles the connection between the server and a single client.
- * To enable the server handle multiple clients simultaneously.
- *
- * The `Socket` represents the socket connection between the server and a single client.
- * While the chatServer object represents the server object that manages all clients connections.
- *
- * The getInputStream() and getOutputStream() methods are used to obtain the input and output streams of the
- * socket connection.
- *
- * A BufferedReader is used to read input from the client, while the PrintWriter is used to write output to
- * the client.
- * */
+@Getter
 public class UserThread extends Thread {
     private final Socket socket;
     private final ChatServer server;
@@ -71,7 +58,6 @@ public class UserThread extends Thread {
             e.printStackTrace();
         }
     }
-    // sends a list of online users to the newly connected user.
     void printUsers() {
         if (server.hasUsers()) {
             output.println("Connected users: " + server.getUserNames());
