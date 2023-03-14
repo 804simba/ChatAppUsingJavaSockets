@@ -16,11 +16,6 @@ public class ChatClient {
         this.hostname = hostname;
         this.port = port;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
     public void execute() {
         try {
             Socket socket = new Socket(hostname, port);
@@ -35,7 +30,6 @@ public class ChatClient {
             System.err.println("I/O Error: " + e.getMessage());
         }
     }
-
     public static void main(String[] args) {
         if (args.length < 1) {
             return;
